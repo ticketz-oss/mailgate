@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.67.1](https://github.com/postalsys/emailengine/compare/v2.67.0...v2.67.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* improve translation quality across 6 languages ([d7d338e](https://github.com/postalsys/emailengine/commit/d7d338e761152909d4c2ca4732fafb60529413ab))
+
 ## [2.67.0](https://github.com/postalsys/emailengine/compare/v2.66.0...v2.67.0) (2026-03-31)
 
 
