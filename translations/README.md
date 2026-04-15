@@ -9,4 +9,4 @@ Translations only cover the public UI.
 3. Select [messages.pot](messages.pot) as the source file
 4. Add your translations
 5. Save file as `locale-name.po` (POEdit should autogenerate `locale-name.mo` as well)
-6. Make a pull request or send the po-file to andris@postalsys.com
+6. Open a pull request with the updated PO and MO files

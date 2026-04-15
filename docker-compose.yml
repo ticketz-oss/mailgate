@@ -12,9 +12,9 @@ services:
             - redis
         environment:
             # Configuration to EmailEngine can be passed via environment variables
-            # For full list see https://github.com/postalsys/emailengine#config-mapping
+            # For full list see the configuration mapping in this repository README
 
-            # Settings to write to v1/settings on startup (https://api.emailengine.app/#operation/postV1Settings)
+            # Settings to write to v1/settings on startup (see API docs in this repository)
             # The following value is a YAML block scalar string, so make it sure it is properly indented
             # This configuration enables SMTP server for local submission
             EENGINE_SETTINGS: >

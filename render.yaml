@@ -1,13 +1,12 @@
 # EmailEngine blueprint for Render.com
-# Use the following repository address when setting up a new blueprint application:
-#   https://github.com/postalsys/emailengine
+# Set your own repository address when setting up a new blueprint application.
 
 services:
     # Web service
     - type: web
       name: emailengine
       env: node
-      repo: https://github.com/postalsys/emailengine.git
+      repo: https://github.com/ticketz-oss/mailgate.git
       #healthCheckPath: /health
       buildCommand: ./update-info.sh && npm install --production
       startCommand: npm start
