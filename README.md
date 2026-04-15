@@ -20,7 +20,7 @@ npm start
 
 ## Version And License
 
-The application shows version and license details in the admin interface and startup logs.
+The application shows version details in the admin interface and startup logs.
 
 ## Requirements
 

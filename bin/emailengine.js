@@ -6,7 +6,6 @@ const packageData = require('../package.json');
 const fs = require('fs');
 const pathlib = require('path');
 const settings = require('../lib/settings');
-const { checkLicense } = require('../lib/tools');
 const pbkdf2 = require('@phc/pbkdf2');
 const { PDKDF2_ITERATIONS, PDKDF2_SALT_SIZE, PDKDF2_DIGEST, generateWebhookTable } = require('../lib/consts');
 
@@ -102,39 +101,6 @@ function run() {
 
         case 'license':
             {
-                let licenseCmd = ((argv._ && argv._[1]) || '').toLowerCase();
-                if (licenseCmd === 'export') {
-                    return settings
-                        .exportLicense()
-                        .then(license => {
-                            console.log(license);
-                            return process.exit(0);
-                        })
-                        .catch(err => {
-                            console.error('Failed to load license information');
-                            console.error(err);
-                            return process.exit(1);
-                        });
-                }
-
-                if (licenseCmd === 'import') {
-                    return settings
-                        .importLicense((argv.license || argv.l || '').toString(), checkLicense)
-                        .then(result => {
-                            if (!result) {
-                                console.error('License key was not imported');
-                            } else {
-                                console.error('License key was imported');
-                            }
-                            return process.exit(0);
-                        })
-                        .catch(err => {
-                            console.error(`Failed to import license information${err.code ? ` [${err.code}]` : ''}`);
-                            console.error(err);
-                            return process.exit(1);
-                        });
-                }
-
                 // Display license information
                 fs.readFile(pathlib.join(__dirname, '..', 'LICENSE.txt'), (err, license) => {
                     if (err) {
