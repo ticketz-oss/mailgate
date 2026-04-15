@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Stop existing Redis",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "-f", "local-dev/docker-compose.yml", "down", "-t", "5"],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false
+      }
+    },
+    {
+      "label": "Start Redis",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "-f", "local-dev/docker-compose.yml", "up", "-d"],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false
+      },
+      "dependsOn": ["Stop existing Redis"],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Run MailGate",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start", "--", "--dbs.redis=redis://127.0.0.1:6380/9", "--api.port=3000"],
+      "isBackground": false,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*\\[.*\\].*server started",
+          "endsPattern": "^.*Listening on port.*"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true
+      },
+      "dependsOn": ["Start Redis"],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Debug MailGate (Redis + App)",
+      "dependsOn": ["Run MailGate"],
+      "dependsOrder": "sequence",
+      "isBackground": false
+    }
+  ]
+}
