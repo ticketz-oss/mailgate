@@ -4164,7 +4164,7 @@ When making API calls remember that requests against the same account are queued
             response: {
                 schema: Joi.object({
                     version: Joi.string().example(packageData.version).description('MailGate version number'),
-                    license: Joi.string().example(packageData.license).description('MailGate license'),
+                    license: Joi.string().example(packageData.license).description('MailGate license identifier'),
                     accounts: Joi.number().example(26).description('Number of registered accounts'),
                     node: Joi.string().example('16.10.0').description('Node.js Version'),
                     redis: Joi.string().example('6.2.4').description('Redis Version'),
@@ -4287,8 +4287,8 @@ When making API calls remember that requests against the same account are queued
             }
         },
         options: {
-            description: 'Request license info',
-            notes: 'Get active license information',
+            description: 'Request license status',
+            notes: 'Get current license status information',
             tags: ['api', 'License'],
 
             auth: {
@@ -4328,8 +4328,8 @@ When making API calls remember that requests against the same account are queued
             }
         },
         options: {
-            description: 'Remove license',
-            notes: 'Remove registered active license',
+            description: 'Clear stored license payload',
+            notes: 'Kept for API compatibility in SSPL-only mode',
             tags: ['api', 'License'],
 
             plugins: {},
@@ -4341,9 +4341,9 @@ When making API calls remember that requests against the same account are queued
 
             response: {
                 schema: Joi.object({
-                    active: Joi.boolean().example(false),
+                    active: Joi.boolean().example(true),
                     details: Joi.boolean().example(false),
-                    type: Joi.string().example('SSPL-1.0-or-later')
+                    type: Joi.string().example('SSPL-1.0')
                 }).label('EmptyLicenseResponse'),
                 failAction: 'log'
             }
@@ -4358,7 +4358,7 @@ When making API calls remember that requests against the same account are queued
             try {
                 const licenseInfo = await call({ cmd: 'updateLicense', license: request.payload.license });
                 if (!licenseInfo) {
-                    let err = new Error('Failed to update license. Check license file contents.');
+                    let err = new Error('Failed to store provided license payload');
                     err.statusCode = 403;
                     throw err;
                 }
@@ -4375,8 +4375,8 @@ When making API calls remember that requests against the same account are queued
             }
         },
         options: {
-            description: 'Register a license',
-            notes: 'Set up a license for MailGate to unlock all features',
+            description: 'Store license payload',
+            notes: 'Kept for API compatibility in SSPL-only mode',
             tags: ['api', 'License'],
 
             plugins: {},
@@ -4399,8 +4399,8 @@ When making API calls remember that requests against the same account are queued
                         .max(10 * 1024)
                         .required()
                         .example('-----BEGIN LICENSE-----\r\n...')
-                        .description('License file')
-                }).label('RegisterLicense')
+                        .description('Opaque license payload kept for compatibility')
+                }).label('LicensePayload')
             },
 
             response: {
@@ -5686,29 +5686,11 @@ When making API calls remember that requests against the same account are queued
                 });
             }
 
-            if (!request.app.licenseInfo || !request.app.licenseInfo.active) {
-                systemAlerts.push({
-                    url: '/admin/config/license',
-                    level: 'warning',
-                    icon: 'key',
-                    message: 'License key is not registered'
-                });
-            }
-
             let licenseDetails = Object.assign({}, (request.app.licenseInfo && request.app.licenseInfo.details) || {});
 
             if (licenseDetails.expires) {
                 let delayMs = new Date(licenseDetails.expires) - Date.now();
                 licenseDetails.expiresDays = Math.max(Math.ceil(delayMs / (24 * 3600 * 1000)), 0);
-            }
-
-            if (licenseDetails.expires && licenseDetails.expiresDays < 31) {
-                systemAlerts.push({
-                    url: '/admin/config/license',
-                    level: 'warning',
-                    icon: 'key',
-                    message: `Your ${licenseDetails.trial ? `trial ` : ''}license key will expire in ${licenseDetails.expiresDays} days`
-                });
             }
 
             let disableTokens = await settings.get('disableTokens');
