@@ -1,7 +1,7 @@
 {
     "name": "MailGate",
     "description": "Headless email client that allows access to any email account over a REST API.",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/mailgate/mailgate/main/static/logo.png",
     "website": "https://github.com/mailgate/mailgate",
     "repository": "https://github.com/mailgate/mailgate",
     "keywords": ["SMTP", "IMAP", "REST", "Email API", "email"],

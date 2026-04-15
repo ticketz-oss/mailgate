@@ -523,7 +523,11 @@ const init = async () => {
             },
             description: `You will need an Access Token to use this API (generate one <a href="/admin/tokens" target="_parent">here</a>).
 
-When making API calls remember that requests against the same account are queued and not executed in parallel. If a previous request takes too much time to finish, a queued request might time out before MailGate can run it.`
+When making API calls remember that requests against the same account are queued and not executed in parallel. If a previous request takes too much time to finish, a queued request might time out before MailGate can run it.`,
+            'x-logo': {
+                url: '/static/logo_transparent_small.png',
+                altText: 'MailGate API'
+            }
         },
 
         securityDefinitions: {
