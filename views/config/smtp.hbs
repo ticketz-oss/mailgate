@@ -12,9 +12,9 @@
     </h1>
 </div>
 
-<p>To queue an email for delivery with EmailEngine, you can use the Simple Mail Transfer Protocol (SMTP)
-    interface or the <a href="https://api.emailengine.app/#tag/submit" target="_blank">message submission API</a>. The
-    preferred way to send emails would be the message submission API. EmailEngine provides the SMTP interface for legacy
+<p>To queue an email for delivery with MailGate, you can use the Simple Mail Transfer Protocol (SMTP)
+    interface or the <a href="/admin/swagger" target="_blank">message submission API</a>. The
+    preferred way to send emails would be the message submission API. MailGate provides the SMTP interface for legacy
     applications that can only send emails using the SMTP protocol.</p>
 <p class="mb-4">On this page, you can configure the settings for the SMTP interface.</p>
 
@@ -206,9 +206,9 @@
         <div class="card-footer">
             <small class="text-muted">
                 <i class="fas fa-info-circle text-gray-300"></i>
-                EmailEngine must be publicly accessible from <em><a href="{{serviceUrl}}"
+                MailGate must be publicly accessible from <em><a href="{{serviceUrl}}"
                         target="_blank">{{serviceUrl}}</a></em> to provision a valid TLS certificate. Otherwise,
-                EmailEngine will use a self-signed certificate.
+                MailGate will use a self-signed certificate.
             </small>
         </div>
         {{/if}}

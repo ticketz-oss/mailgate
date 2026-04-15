@@ -2,7 +2,7 @@
     "name": "emailengine-app",
     "version": "2.24.4",
     "private": true,
-    "productTitle": "EmailEngine",
+    "productTitle": "MailGate",
     "description": "Email Sync Engine",
     "main": "server.js",
     "scripts": {
@@ -21,19 +21,19 @@
     "keywords": [
         "IMAP"
     ],
-    "author": "Postal Systems OU",
-    "license": "SSPL-1.0-or-later OR LICENSE_EMAILENGINE",
+    "author": "MailGate Team",
+    "license": "SSPL-1.0",
     "bin": {
         "emailengine": "bin/emailengine.js"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/postalsys/emailengine.git"
+        "url": "git+https://github.com/mailgate/mailgate.git"
     },
     "bugs": {
-        "url": "https://github.com/postalsys/emailengine/issues"
+        "url": "https://github.com/mailgate/mailgate/issues"
     },
-    "homepage": "https://emailengine.app/",
+    "homepage": "https://github.com/mailgate/mailgate",
     "dependencies": {
         "@bugsnag/js": "7.17.0",
         "@elastic/elasticsearch": "8.2.1",
@@ -122,7 +122,6 @@
             "node_modules/swagger-ui-dist/**/*",
             "translations/**/*",
             "LICENSE.txt",
-            "LICENSE_EMAILENGINE.txt",
             "help.txt",
             "version-info.json"
         ],

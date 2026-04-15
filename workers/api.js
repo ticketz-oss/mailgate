@@ -515,15 +515,15 @@ const init = async () => {
         //auth: 'api-token',
 
         info: {
-            title: 'EmailEngine',
+            title: 'MailGate',
             version: packageData.version,
             contact: {
-                name: 'Postal Systems OÜ',
-                email: 'info@emailengine.app'
+                name: 'MailGate Team',
+                email: 'support@mailgate.local'
             },
             description: `You will need an Access Token to use this API (generate one <a href="/admin/tokens" target="_parent">here</a>).
 
-When making API calls remember that requests against the same account are queued and not executed in parallel. If a previous request takes too much time to finish, a queued request might time out before EmailEngine can run it.`
+When making API calls remember that requests against the same account are queued and not executed in parallel. If a previous request takes too much time to finish, a queued request might time out before MailGate can run it.`
         },
 
         securityDefinitions: {
@@ -764,17 +764,6 @@ When making API calls remember that requests against the same account are queued
         path: '/LICENSE.txt',
         handler: {
             file: { path: pathlib.join(__dirname, '..', 'LICENSE.txt'), confine: false }
-        },
-        options: {
-            auth: false
-        }
-    });
-
-    server.route({
-        method: 'GET',
-        path: '/LICENSE_EMAILENGINE.txt',
-        handler: {
-            file: { path: pathlib.join(__dirname, '..', 'LICENSE_EMAILENGINE.txt'), confine: false }
         },
         options: {
             auth: false
@@ -2699,7 +2688,7 @@ When making API calls remember that requests against the same account are queued
                             })
                             .label('ForwardAttachments')
                     })
-                        .description('Message reference for a reply or a forward. This is EmailEngine specific ID, not Message-ID header value.')
+                        .description('Message reference for a reply or a forward. This is MailGate specific ID, not Message-ID header value.')
                         .label('MessageReference'),
 
                     from: addressSchema.required().example({ name: 'From Me', address: 'sender@example.com' }),
@@ -3764,7 +3753,7 @@ When making API calls remember that requests against the same account are queued
             },
 
             description: 'Submit message for delivery',
-            notes: 'Submit message for delivery. If reference message ID is provided then EmailEngine adds all headers and flags required for a reply/forward automatically.',
+            notes: 'Submit message for delivery. If reference message ID is provided then MailGate adds all headers and flags required for a reply/forward automatically.',
             tags: ['api', 'Submit'],
 
             plugins: {},
@@ -3813,7 +3802,7 @@ When making API calls remember that requests against the same account are queued
                             })
                             .label('ForwardAttachments')
                     })
-                        .description('Message reference for a reply or a forward. This is EmailEngine specific ID, not Message-ID header value.')
+                        .description('Message reference for a reply or a forward. This is MailGate specific ID, not Message-ID header value.')
                         .label('MessageReference'),
 
                     envelope: Joi.object({
@@ -3925,7 +3914,7 @@ When making API calls remember that requests against the same account are queued
                     messageId: Joi.string().max(996).example('<test123@example.com>').description('Message ID'),
                     headers: Joi.object().label('CustomHeaders').description('Custom Headers').unknown(),
 
-                    trackingEnabled: Joi.boolean().example(false).description('Should EmailEngine track clicks and opens for this message'),
+                    trackingEnabled: Joi.boolean().example(false).description('Should MailGate track clicks and opens for this message'),
 
                     copy: Joi.boolean()
                         .example(true)
@@ -4174,8 +4163,8 @@ When making API calls remember that requests against the same account are queued
 
             response: {
                 schema: Joi.object({
-                    version: Joi.string().example(packageData.version).description('EmailEngine version number'),
-                    license: Joi.string().example(packageData.license).description('EmailEngine license'),
+                    version: Joi.string().example(packageData.version).description('MailGate version number'),
+                    license: Joi.string().example(packageData.license).description('MailGate license'),
                     accounts: Joi.number().example(26).description('Number of registered accounts'),
                     node: Joi.string().example('16.10.0').description('Node.js Version'),
                     redis: Joi.string().example('6.2.4').description('Redis Version'),
@@ -4387,7 +4376,7 @@ When making API calls remember that requests against the same account are queued
         },
         options: {
             description: 'Register a license',
-            notes: 'Set up a license for EmailEngine to unlock all features',
+            notes: 'Set up a license for MailGate to unlock all features',
             tags: ['api', 'License'],
 
             plugins: {},
@@ -4579,7 +4568,7 @@ When making API calls remember that requests against the same account are queued
                                 scheduled: Joi.date().iso().example('2021-02-17T13:43:18.860Z').description('When this message is supposed to be delivered'),
                                 nextAttempt: Joi.date().iso().example('2021-02-17T13:43:18.860Z').allow(false).description('Next delivery attempt'),
 
-                                attemptsMade: Joi.number().example(3).description('How many times EmailEngine has tried to deliver this email'),
+                                attemptsMade: Joi.number().example(3).description('How many times MailGate has tried to deliver this email'),
                                 attempts: Joi.number().example(3).description('How many delivery attempts to make until message is considered as failed'),
 
                                 progress: Joi.object({
@@ -5652,7 +5641,7 @@ When making API calls remember that requests against the same account are queued
                     url: '/admin/upgrade',
                     level: 'info',
                     icon: 'exclamation-triangle',
-                    message: `An update is available: Emailengine v${upgradeInfo.available}`
+                    message: `An update is available: MailGate v${upgradeInfo.available}`
                 });
             }
 
@@ -5812,7 +5801,7 @@ When making API calls remember that requests against the same account are queued
             finished(request.app.stream, err => request.app.stream.finalize(err));
             setImmediate(() => {
                 try {
-                    request.app.stream.write(`: EmailEngine v${packageData.version}\n\n`);
+                    request.app.stream.write(`: MailGate v${packageData.version}\n\n`);
                 } catch (err) {
                     // ignore
                 }

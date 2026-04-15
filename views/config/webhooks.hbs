@@ -18,7 +18,7 @@
     </h1>
 </div>
 
-<p class="mb-4">Webhooks allow EmailEngine to notify you about changes on registered email accounts.</p>
+<p class="mb-4">Webhooks allow MailGate to notify you about changes on registered email accounts.</p>
 
 {{#if values.webhooksEnabled}}
 {{#if webhookErrorFlag}}
@@ -89,7 +89,7 @@
                 {{#if errors.webhooks}}
                 <span class="invalid-feedback">{{errors.webhooks}}</span>
                 {{/if}}
-                <small class="form-text text-muted">EmailEngine makes a POST request with a JSON payload against this
+                <small class="form-text text-muted">MailGate makes a POST request with a JSON payload against this
                     URL.</small>
             </div>
 
@@ -159,8 +159,8 @@
         </div>
         <div class="card-body">
 
-            <p>By default, EmailEngine includes envelope-specific data like sender and recipient addresses or Message-ID
-                values in the webhook payload. If needed, you can configure EmailEngine to include the contents of other
+            <p>By default, MailGate includes envelope-specific data like sender and recipient addresses or Message-ID
+                values in the webhook payload. If needed, you can configure MailGate to include the contents of other
                 header keys as well.</p>
 
             <div class="form-group form-check">
@@ -201,7 +201,7 @@
         <div class="card-body">
 
             <p>By default, only message metadata without any text content is included in the webhook payload for new
-                emails. If needed, you can configure EmailEngine to include plaintext and HTML content in the
+                emails. If needed, you can configure MailGate to include plaintext and HTML content in the
                 payload as
                 well.</p>
 

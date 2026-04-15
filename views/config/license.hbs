@@ -23,33 +23,11 @@
 </div>
 
 <p class="mb-4">
-    EmailEngine is dual-licensed under <a href="/LICENSE.txt" target="_blank">Server Side Public License v1</a> and the
-    <a href="/LICENSE_EMAILENGINE.txt" target="_blank">EmailEngine License</a>. Using the EmailEngine license and
-    unlocking commercial features requires a valid license key.
+    MailGate is licensed under <a href="/LICENSE.txt" target="_blank">Server Side Public License v1 (SSPL)</a>.
+    This fork uses SSPL only.
 </p>
 
 {{#unless licenseInfo.active}}
-
-<div class="card mb-4">
-    <div class="card-body">
-        <div class="float-right ml-4">
-            <a href="https://postalsys.com/licenses" target="_blank" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-                <span class="text">Provision a license</span>
-            </a>
-        </div>
-        <p class="mb-4">
-            License keys for EmailEngine can be provisioned from the Postal Systems' <a
-                href="https://postalsys.com/licenses" target="_blank">license
-                central</a>
-            (requires a paid subscription).
-        </p>
-
-    </div>
-</div>
-
 {{/unless}}
 
 {{#if licenseInfo.active}}
@@ -108,9 +86,7 @@
     <div class="collapse {{#if showLicenseText}} show{{/if}}" id="setupKey">
         <div class="card-body">
 
-            {{#if licenseInfo.active}}<p>You can replace an existing license key with a new one. Provision a new license
-                key from the Postal Systems' <a href="https://postalsys.com/licenses" target="_blank">license
-                    central</a> (requires a paid subscription).</p>{{/if}}
+            {{#if licenseInfo.active}}<p>You can replace an existing license key with a new one.</p>{{/if}}
 
             <form method="post" action="/admin/config/license">
                 <input type="hidden" name="crumb" id="crumb" value="{{crumb}}" />

@@ -4,12 +4,12 @@ set -e
 
 DOMAIN_NAME=$1
 
-APP_URL="https://github.com/postalsys/emailengine/releases/latest/download/emailengine.tar.gz"
+APP_URL="https://github.com/mailgate/mailgate/releases/latest/download/emailengine.tar.gz"
 
 show_info () {
     echo "Usage: $0 <domain-name>"
     echo "Where"
-    echo " <domain-name> is the domain name for EmailEngine, eg. \"example.com\""
+    echo " <domain-name> is the domain name for MailGate, eg. \"example.com\""
 }
 
 if [[ $EUID -ne 0 ]]; then
@@ -30,7 +30,7 @@ fi
 
 if [[ -z $DOMAIN_NAME ]]; then
 
-    echo "Enter the domain name for your new EmailEngine installation."
+    echo "Enter the domain name for your new MailGate installation."
     echo "(ex. example.com or test.example.com)"
 
     while [ -z "$DOMAIN_NAME" ]
@@ -59,7 +59,7 @@ apt-get install redis-server caddy wget -q -y
 systemctl enable caddy
 systemctl start caddy
 
-# Download and extract EmailEngine executable
+# Download and extract MailGate executable
 TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'ee')
 cd $TMPDIR
 if ! [ -x `command -v wget` ]; then
@@ -70,7 +70,7 @@ if ! [ -x `command -v wget` ]; then
         curl "$APP_URL" -L -o emailengine.tar.gz
     fi
 else
-    # use wget do download EmailEngine
+    # use wget do download MailGate
     wget "$APP_URL"
 fi
 
@@ -81,9 +81,9 @@ chmod +x /opt/emailengine
 
 rm -rf $TMPDIR
 
-# Create unit file for EmailEngine
+# Create unit file for MailGate
 echo "[Unit]
-Description=EmailEngine
+Description=MailGate
 After=redis-server
 
 [Service]
@@ -94,14 +94,14 @@ Environment=\"EENGINE_API_PROXY=true\"
 # Triggers install script specific upgrade instructions
 Environment=\"EENGINE_INSTALL_SCRIPT=true\"
 
-# Folder where EmailEngine executable is located
+# Folder where MailGate executable is located
 WorkingDirectory=/opt
 
-# EmailEngine does not require any special privileges
+# MailGate does not require any special privileges
 User=www-data
 Group=www-data
 
-# Run the EmailEngine executable
+# Run the MailGate executable
 ExecStart=/opt/emailengine
 
 Type=simple
@@ -127,7 +127,7 @@ ${DOMAIN_NAME} {
 }" > /etc/caddy/Caddyfile
 
 # Create upgrade script
-cat > '/opt/upgrade-emailengine.sh' <<'EOL'
+cat > '/opt/upgrade-mailgate.sh' <<'EOL'
 #!/bin/bash
 
 set -e
@@ -142,7 +142,7 @@ OLD_VERSION=`/opt/emailengine -v`
 TMPDIR=$(mktemp -d -t ci-XXXXXXXXXX)
 
 cd "$TMPDIR"
-wget https://github.com/postalsys/emailengine/releases/latest/download/emailengine.tar.gz
+wget https://github.com/mailgate/mailgate/releases/latest/download/emailengine.tar.gz
 tar xzf emailengine.tar.gz
 rm -rf emailengine.tar.gz
 
@@ -157,12 +157,13 @@ else
     chmod +x /opt/emailengine
     systemctl restart emailengine
 
-    echo "Upgraded EmailEngine"
+    echo "Upgraded MailGate"
     echo "  - was: $OLD_VERSION"
     echo "  - now: $NEW_VERSION"
 fi
 EOL
-chmod +x /opt/upgrade-emailengine.sh
+chmod +x /opt/upgrade-mailgate.sh
+ln -sf /opt/upgrade-mailgate.sh /opt/upgrade-emailengine.sh
 
 
 systemctl reload caddy
@@ -176,8 +177,8 @@ echo "."
 
 echo ""
 echo "Installation complete."
-echo "Access your new EmailEngine installation in a browser at https://${DOMAIN_NAME}/"
+echo "Access your new MailGate installation in a browser at https://${DOMAIN_NAME}/"
 echo ""
-echo "To upgrade EmailEngine in the future, run the following command:"
-echo "  /opt/upgrade-emailengine.sh"
+echo "To upgrade MailGate in the future, run the following command:"
+echo "  /opt/upgrade-mailgate.sh"
 echo ""

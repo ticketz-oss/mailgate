@@ -2,7 +2,7 @@
     <img src="/static/logo.png"
         style="display: block; float: left; margin: 10px 10px 0 0; max-width: 32px; max-height: 32px" />
 
-    <h1>EmailEngine</h1>
+    <h1>MailGate</h1>
 
     {{#unless hasAccounts}}
 
@@ -10,14 +10,14 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Welcome to EmailEngine!
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Welcome to MailGate!
                     </div>
-                    <p>To start using EmailEngine, add an email account to the <a href="/admin/accounts">account
+                    <p>To start using MailGate, add an email account to the <a href="/admin/accounts">account
                             registry</a>. Once registered, you can access this account to send
-                        and receive emails using the <a href="/admin/swagger">EmailEngine's API</a>.
+                        and receive emails using the <a href="/admin/swagger">MailGate's API</a>.
                     </p>
                     <p>You can add email accounts by using the API endpoint for <a
-                            href="https://api.emailengine.app/#operation/postV1Account" target="_blank">registering
+                            href="/admin/swagger" target="_blank">registering
                             accounts</a> or the hosted authentication form.
                     </p>
                     <div>
@@ -191,13 +191,13 @@
     <div class="mb-4">
         <h6>Software Versions</h6>
         <ul class="list-group">
-            <li class="list-group-item">EmailEngine v{{packageData.version}}</li>
+            <li class="list-group-item">MailGate v{{packageData.version}}</li>
             <li class="list-group-item">Node.js v{{stats.node}}</li>
             <li class="list-group-item">Redis v{{stats.redis}}</li>
             <li class="list-group-item">ImapFlow v{{stats.imapflow}}</li>
             {{#if stats.build.commit}}
             <li class="list-group-item">Code version: <a
-                    href="https://github.com/postalsys/emailengine/tree/{{stats.build.commit}}">{{stats.build.commit}}</a>
+                    href="/">{{stats.build.commit}}</a>
             </li>
             {{/if}}
         </ul>

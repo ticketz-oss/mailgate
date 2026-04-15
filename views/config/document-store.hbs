@@ -6,7 +6,7 @@
 </div>
 
 <p class="mb-4">
-    EmailEngine can sync emails to a document store for local processing. Currently only ElasticSearch is supported.
+    MailGate can sync emails to a document store for local processing. Currently only ElasticSearch is supported.
 </p>
 
 <div class="card border-left-info shadow mb-4">
@@ -16,7 +16,7 @@
 
                 <p>Document Store is in beta, which means the application might change in the future without a
                     possible migration path.</p>
-                <p>Syncing emails and changes to the Document Store is <em>best effort</em>. EmailEngine might miss
+                <p>Syncing emails and changes to the Document Store is <em>best effort</em>. MailGate might miss
                     some data. Email attachments are not stored in the Document Store.</p>
                 <p>Enable Document Store before adding any accounts. Otherwise, emails that have been already
                     processed will not be indexed.</p>
@@ -97,7 +97,7 @@
                 {{#if errors.documentStoreIndex}}
                 <span class="invalid-feedback">{{errors.documentStoreIndex}}</span>
                 {{/if}}
-                <small class="form-text text-muted">Index to use for data. EmailEngine will create a separate index with
+                <small class="form-text text-muted">Index to use for data. MailGate will create a separate index with
                     the same prefix for threading.</small>
             </div>
 

@@ -1,6 +1,6 @@
 {
-    "name": "emailengine",
-    "short_name": "emailengine",
+    "name": "mailgate",
+    "short_name": "mailgate",
     "icons": [
         {
             "src": "/static/favicon/android-chrome-192x192.png",
