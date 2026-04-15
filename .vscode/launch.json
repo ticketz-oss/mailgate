@@ -1,21 +1,22 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "MailGate Debug",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/server.js",
-      "args": ["--dbs.redis=redis://127.0.0.1:6380/9", "--api.port=3000"],
-      "restart": true,
-      "skipFiles": ["<node_internals>/**"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "preLaunchTask": "Start Redis",
-      "env": {
-        "NODE_ENV": "development",
-        "EENGINE_SECRET": "dev-secret"
-      }
-    }
-  ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MailGate Debug",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": ["--watch"],
+            "program": "${workspaceFolder}/server.js",
+            "args": ["--dbs.redis=redis://127.0.0.1:6380/9", "--api.port=3000"],
+            "restart": true,
+            "skipFiles": ["<node_internals>/**"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "preLaunchTask": "Start Redis",
+            "env": {
+                "NODE_ENV": "development",
+                "EENGINE_SECRET": "dev-secret"
+            }
+        }
+    ]
 }
