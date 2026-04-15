@@ -1,0 +1,19 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Envelope background -->
+  <rect x="40" y="75" width="176" height="115" rx="8" fill="#FF6B6B"/>
+  
+  <!-- Envelope top flap - left side -->
+  <polygon points="40,75 128,130 40,75" fill="#FF5252"/>
+  
+  <!-- Envelope top flap - right side -->
+  <polygon points="216,75 128,130 216,75" fill="#FF6B6B" opacity="0.7"/>
+  
+  <!-- Letter background -->
+  <rect x="55" y="95" width="146" height="75" rx="4" fill="white"/>
+  
+  <!-- Letter text lines -->
+  <line x1="70" y1="108" x2="186" y2="108" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="70" y1="121" x2="165" y2="121" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="70" y1="134" x2="160" y2="134" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="70" y1="147" x2="155" y2="147" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+</svg>
