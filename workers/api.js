@@ -519,7 +519,7 @@ const init = async () => {
             version: packageData.version,
             contact: {
                 name: 'MailGate Team',
-                email: 'support@mailgate.local'
+                email: 'support@example.com'
             },
             description: `You will need an Access Token to use this API (generate one <a href="/admin/tokens" target="_parent">here</a>).
 
