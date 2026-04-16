@@ -8,9 +8,11 @@
 }
 
 .bg-login-page-image {
-    background: url(/static/logo_wide.png);
+    background-color: #f8f9fc;
+    background-image: url(/static/logo_login_square.svg);
     background-position: center;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 72%;
 }
 
 .code-link {
