@@ -20,7 +20,6 @@ const {
     getLogs,
     getWorkerCount,
     normalizePath,
-    assertPreconditions,
     unpackUIDRangeForSearch,
     matcher,
     readEnvValue
@@ -5851,28 +5850,14 @@ When making API calls remember that requests against the same account are queued
 
     await server.start();
 
-    // run periodic precondition check without blocking the API on transient errors
-    let updateAssertPreconditionResult = async () => {
-        try {
-            await assertPreconditions(redis);
-            assertPreconditionResult = false;
-        } catch (err) {
-            if (err && err.code === 'EContentValidation') {
-                assertPreconditionResult = Boom.boomify(err);
-                return;
-            }
-
-            logger.error({ msg: 'Failed to check preconditions', err });
-        }
-    };
+    // license precondition checks are disabled
+    assertPreconditionResult = false;
 
     // renew TLS certificates if needed
     setInterval(() => {
         async function handler() {
             let serviceDomain = await getServiceDomain();
             let currentCert = await certHandler.getCertificate(serviceDomain, true);
-
-            await updateAssertPreconditionResult();
 
             if (
                 currentCert &&
